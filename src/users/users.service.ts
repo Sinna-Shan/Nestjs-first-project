@@ -35,7 +35,7 @@ export class UsersService {
     },
   ];
 
-  findAll(role?: 'intern ' | 'engineer' | 'admin') {
+  findAll(role?: 'INTERN ' | 'ENGINEER' | 'ADMIN') {
     if (role) {
       return this.users.filter((user) => user.role === role);
     }
@@ -56,11 +56,11 @@ export class UsersService {
   create(user: {
     name: string;
     email: string;
-    role: 'intern ' | 'engineer' | 'admin';
+    role: 'INTERN ' | 'ENGINEER' | 'ADMIN';
   }) {
-    const usersByHighestIds = [...this.users].sort((a, b) => a.id - b.id);
+    const usersByHighestIds = [...this.users].sort((a, b) => b.id - a.id);
     const newUser = {
-      id: usersByHighestIds[0].id,
+      id: usersByHighestIds[0].id + 1,
       ...user,
     };
 
@@ -73,10 +73,10 @@ export class UsersService {
     updateUser: {
       name?: string;
       email?: string;
-      role?: 'intern ' | 'engineer' | 'admin';
+      role?: 'INTERN ' | 'ENGINEER' | 'ADMIN';
     },
   ) {
-    this.users.map((user) => {
+    this.users = this.users.map((user) => {
       if (user.id === id) {
         return { ...user, ...updateUser };
       }

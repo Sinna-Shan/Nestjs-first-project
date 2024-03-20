@@ -15,7 +15,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  getAll(@Query('role') role?: 'intern ' | 'engineer' | 'admin') {
+  getAll(@Query('role') role?: 'INTERN ' | 'ENGINEER' | 'ADMIN') {
     return this.usersService.findAll(role);
   }
 
@@ -30,7 +30,7 @@ export class UsersController {
     user: {
       name: string;
       email: string;
-      role: 'intern ' | 'engineer' | 'admin';
+      role: 'INTERN ' | 'ENGINEER' | 'ADMIN';
     },
   ) {
     return this.usersService.create(user);
@@ -43,7 +43,7 @@ export class UsersController {
     userUpdate: {
       name: string;
       email: string;
-      role: 'intern ' | 'engineer' | 'admin';
+      role: 'INTERN ' | 'ENGINEER' | 'ADMIN';
     },
   ) {
     return this.usersService.update(Number.parseInt(id), userUpdate);
@@ -51,6 +51,6 @@ export class UsersController {
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return { id };
+    return this.usersService.delete(Number.parseInt(id));
   }
 }
